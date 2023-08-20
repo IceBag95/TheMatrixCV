@@ -10,8 +10,8 @@
 const videowidth = document.getElementById("video-background");
 
 function resizeVideo() {
-    videowidth.style.width = window.innerWidth + 100 + "px";
-    videowidth.style.height = window.innerHeight + 100 + "px";
+    videowidth.style.width = window.innerWidth + "px";
+    videowidth.style.height = window.innerHeight + "px";
 }
 
 // Καλείται την πρώτη φορά για να ρυθμίσει το μέγεθος του βίντεο
@@ -24,6 +24,7 @@ window.addEventListener("resize", resizeVideo);
 
 
 /* 
+
                         ==========================
                             ΛΟΓΙΚΗ ΓΙΑ EΙΣΟΔΟ 
                                 ΣΤΟ MATRIX
@@ -39,6 +40,15 @@ const welcomeBtn = document.getElementById("WelcomeButton");
 const whiteSrn = document.getElementById("whitescreen");
 const detailsBox = document.getElementById("details-Box");
 const keimenon = document.getElementById("keimeno");
+const userInfo = document.getElementById("Info-Box");
+const greenCursor = document.getElementById("cursor");
+const screenText = document.getElementById("specifics");
+const myspan= document.querySelector('.myspan');
+const buttons = document.querySelectorAll('.buttons');
+const myImage = document.getElementById("eikona");
+const myInfo = document.getElementById("Infolist");
+const listItems = userInfo.querySelectorAll('p');
+let counttime;
 
 welcomeBtn.addEventListener('click', async function() {
     whiteSrn.style.display = "flex";
@@ -50,31 +60,107 @@ welcomeBtn.addEventListener('click', async function() {
     FadeIn(welcomescreen, 1000, `${welcomescreen.style.backgroundColor}`, 3000);
     
     
-    const nextStep = setTimeout(async function(){
+    const firstBox = setTimeout(async function(){
         welcomescreen.style.display = "none";
-        detailsBox.style.display = "flex";
-        keimenon.style.display = "flex";
+        detailsBox.style.display = "inline-block";
         console.log(`starting width ${detailsBox.getBoundingClientRect().width}`);
         console.log(`starting height ${detailsBox.getBoundingClientRect().height}`);
-
+        detailsBox.style.top = "320px";
         
-        await MoveLeft(detailsBox, 350).finished;
         
-        detailsBox.style.left = "20px";         
+        setTimeout(async function(){
+            await MoveLeft(detailsBox, 300).finished;
+            detailsBox.style.left = "20px";         
+        }, 300);
         
-        await MoveTop(detailsBox, 300).finished; 
+        setTimeout(async function(){
+            await MoveTop(detailsBox, 300).finished; 
+        }, 600);
         
-        detailsBox.style.top = "34vmin";
-        await ChangeDimensions(detailsBox, 60, 70, 200).finished;
-        console.log("ending stage");
-
-        console.log(`ending width ${detailsBox.getBoundingClientRect().width}`);
-        console.log(`ending height ${detailsBox.getBoundingClientRect().height}`);
+        setTimeout(async function(){
+            ChangeDimensions(detailsBox, 60, 80, 200).finished;
+            console.log("ending stage");
+            console.log("cursor is on");
+            console.log(`ending width ${detailsBox.getBoundingClientRect().width}`);
+            console.log(`ending height ${detailsBox.getBoundingClientRect().height}`);        
+        }, 800);
         
+        
+        setTimeout(async function(){
+            let newString = screenText.innerHTML;
+            screenText.innerHTML = "";
+            screenText.style.display = "inline";
+            keimenon.style.display = "flex";
+            greenCursor.style.display = "inline-block"; 
+            setTimeout(async function(){
+                greenCursor.style.display = "none"; 
+                console.log("cursor is gone");
+                myspan.style.display = "inline-block";
+                animateText(newString);
+                counttime = newString.length * 20;
+                await RevealButtons(buttons, counttime);
+            },1100)
+        }, 1000);
         
     }, 1500)
-    nextStep;
+
+    firstBox;
+
+    const secondBox = setTimeout(async function(){
+        userInfo.style.display = "flex";
+        console.log(`starting width ${userInfo.getBoundingClientRect().width}`);
+        console.log(`starting height ${userInfo.getBoundingClientRect().height}`);
+        userInfo.style.top = "320px";
+        
+        setTimeout(async function(){
+            await MoveRight(userInfo, 200).finished;
+            userInfo.style.right = "20px";
+        },200);
+        
+        setTimeout(async function(){
+            await MoveTop(userInfo, 300).finished; 
+            
+        },500);
+
+        setTimeout(async function(){
+            await ChangeDimensions(userInfo, 35, 80, 200).finished;
+            console.log("ending stage");
+            console.log(`ending width ${userInfo.getBoundingClientRect().width}`);
+            console.log(`ending height ${userInfo.getBoundingClientRect().height}`);
+        },800);
+
+        setTimeout(async function(){
+            myImage.style.display = "flex";
+            myInfo.style.display = "flex";
+        }, 1000);
+
+    }, 1500);
+
+    secondBox;
 });
+
+
+
+
+
+
+/* 
+               
+                                ============================
+                                    ΛΟΓΙΚΗ ΚΑΙ ANIMATIONS
+                                           ΓΙΑ TEXT
+                                ============================
+
+*/
+
+const ekpaideusi = ["Αριστούχος Απόφοιτος Λυκείου με βαθμό απολυτηρίου 18.1   (2013)", 
+                    "Απόφοιτος Τμήματος Μαθηματικών Αθήνας   (2020)", 
+                    " Δευτεροετής Φοιτητής Μεταπτυχιακού Προγράμματος Πληροφορικής του ΕΑΠ με τίτλο «Εξειδίκευση στα πληροφοριακά συστήματα»   (2022 - )"];
+
+const ekpaideusi2 = ["Αριστούχος Απόφοιτος Λυκείου με βαθμό απολυτηρίου 18.1   (2013)\nΑπόφοιτος Τμήματος Μαθηματικών Αθήνας   (2020)\nΔευτεροετής Φοιτητής Μεταπτυχιακού Προγράμματος Πληροφορικής του ΕΑΠ με τίτλο «Εξειδίκευση στα πληροφοριακά συστήματα»   (2022 - )"];
+
+
+
 
 
 
@@ -138,7 +224,7 @@ function ChangeHeight(element, height, time=1000){
 }
 
 
-function ChangeDimensions(element, width, height, time=1000){
+async function ChangeDimensions(element, width, height, time=1000){
     const widthAnimation = ChangeWidth(element, width, time);
     const heightAnimation = ChangeHeight(element, height, time);
     Promise.all([widthAnimation.finished, heightAnimation.finished]).then(() => {
@@ -159,6 +245,18 @@ function FadeIn(element, fadeTime, fadecolor, sclaetime){
         .catch((error) => {
             console.error("An error occurred:", error);
         });
+}
+
+async function Reveal(element, time, delaytime){
+    return element.animate([
+        {opacity: 0},
+        {opacity: 1}
+    ],{
+        duration: time,
+        delay: delaytime,
+        iterations: 1,
+        fill: 'forwards'
+    });
 }
 
 
@@ -189,12 +287,13 @@ function MoveLeft(element, time){
         fill: 'forwards'
     });
 }
+//userInfo.style.right = "20px"         
 
 function MoveRight(element, time){
     const rect = element.getBoundingClientRect();
     return element.animate([
-        {transform: `translateX(0)`},
-        {transform: `translateX(${rect.right - rect.width})`}
+        {transform: `translateX(${0}px)`},
+        {transform: `translateX(${rect.right - 300}px)`}
     ],{
         duration: time,
         easing: "ease-in-out",
@@ -203,5 +302,42 @@ function MoveRight(element, time){
         fill: 'forwards'
     });
 }
+
+
+function animateText(text) {
+    screenText.innerHTML = ""; // Καθαρίστε το κείμενο
+    myspan.innerHTML = "";
+    screenText.appendChild(myspan);
+    let index = 0;
+
+
+    function addNextChar() {
+        if (index < text.length) {
+            screenText.removeChild(myspan);
+            if (text[index] === '\n') {
+                screenText.innerHTML += '<br>'; // Προσθέστε <br> για αλλαγή γραμμής
+            } else {
+                screenText.innerHTML += text[index] ;
+            }
+            index++;
+            setTimeout(addNextChar, 20); // Καλέστε τη συνάρτηση ξανά μετά από το χρονικό διάστημα
+        }
+        screenText.appendChild(myspan);
+    }
+
+    addNextChar(); // Εκκίνηση του animation
+}
+
+
+async function RevealButtons(buttons, startingtime){
+    let time = startingtime;
+    for(let i = 0; i<buttons.length; i++){
+        buttons[i].style.display = "flex";
+        await Reveal(buttons[i], 200, time).finished;
+        time += 200;
+    }
+
+}
+
 
 

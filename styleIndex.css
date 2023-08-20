@@ -21,8 +21,8 @@ body {
 
 #video-background{
     position: fixed;
-    left: -50px; /* Μετατόπιση προς τα αριστερά για το "ξεχείλωμα" */
-    top: -40px; /* Μετατόπιση προς τα πάνω για το "ξεχείλωμα" */
+    left: 0px; /* Μετατόπιση προς τα αριστερά για το "ξεχείλωμα" */
+    top: 0px; /* Μετατόπιση προς τα πάνω για το "ξεχείλωμα" */
     object-fit: cover;
     z-index: -1;
 }
@@ -72,8 +72,8 @@ body {
 
 #details-Box{
     display: none;
-    width: 200px;
-    height: 250px;
+    width: 250px;
+    height: 200px;
     justify-content: left;
     align-items:start;
     color: white;
@@ -81,13 +81,108 @@ body {
 
 
 #keimeno{
-    display: flex;
+    display: none;
     background-color: black;
     color: white;
     font-size: large;
+    justify-content: baseline;
+    padding: 5px;
 
+}
+
+#specifics{
+    white-space: pre-line;
+}
+
+#specifics .myspan {
+    width: 12px; /* Ορίζει το πλάτος σε 100 pixel */
+    height: 20px; /* Ορίζει το μέγιστο πλάτος σε 200 pixel */
+    display: none; /* Καθιστά το span inline-block για να εφαρμοστεί το πλάτος */
+    background-color: rgb(96, 255, 96);
+    margin-top: 1px;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+  
+#cursor{
+    display: none;
+    width: 12px;
+    height: 20px;
+    background-color: rgb(96, 255, 96);
+    margin-top: 1px;
+    margin-left: 2px;
+    animation: blink 0.5s infinite;
+}
+
+
+#buttonSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    margin-top: 50%;
+    margin-right: 7%;
+}
+
+
+#buttonSection .buttons{
+    display: none;
+    margin-left: 2%;
+    margin-right: 2%;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
 }
 
 #Info-Box{
     display: none;
+    flex-direction: column;
+    width: 250px;
+    height: 200px;
+    justify-content: center;
+    align-items:center;
+    color: white;
+}
+
+#eikona{
+    display: none;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+#myImage{
+    display: flex;
+    width: 62%;
+    height: 100%;
+    max-width: 62%;
+    max-height: 100%;
+    border-radius: 3px;
+}
+
+#Infolist{
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+}
+
+#Info-Box p{
+    display: inline-flex;
+    color: white;
+    margin-top: 3%;
+    margin-left: 5px;
+
+}
+
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1; /* Εμφάνιση */
+    }
+    50% {
+        opacity: 0; /* Απόκρυψη */
+    }
 }
