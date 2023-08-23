@@ -174,7 +174,48 @@ body {
     color: white;
     margin-top: 3%;
     margin-left: 5px;
+    align-items: center;
 
+}
+
+#exitingStage{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 200px;
+    padding: 10px;
+}
+
+
+#exitingStage h1{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#exitingStage #SignOut{
+    color: white;
+}
+
+#exitingStage #Thanks{
+    color: black;
+}
+
+#loadingBarFrame{
+    display: block;
+    margin:0px 15px 0px 15px;
+    height: 40px;
+    padding: 2px;
+    width: 80%;
+    border: 2px solid rgb(96, 255, 96);
+}
+
+#loadingBar{
+    display: inline-block;
+    width: 0%;
+    height: 100%;
+    background-color: rgb(96, 255, 96);
 }
 
 
